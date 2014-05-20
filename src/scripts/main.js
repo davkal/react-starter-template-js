@@ -4,7 +4,13 @@
 require("script!react/react-with-addons.js")
 require("script!jquery/jquery.js")
 
-var StarterApp = require("./components/StarterApp")
+var App = require("./components/App")
 
-React.renderComponent(<StarterApp />, document.getElementById('app'))
+var Fluxxor = require('fluxxor');
+var stores = require('./stores');
+var actions = require('./actions');
+
+var flux = new Fluxxor.Flux(stores, actions);
+
+React.renderComponent(<App flux={flux} />, document.getElementById('app'))
 
