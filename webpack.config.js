@@ -2,7 +2,7 @@ var path = require("path");
 var webpack = require("webpack");
 module.exports = {
   // This is the main file that should include all other JS files
-  entry: "./src/scripts/main.coffee",
+  entry: "./src/scripts/main.js",
   target: "web",
   debug: true,
   // We are watching in the gulp.watch, so tell webpack not to watch
@@ -18,7 +18,7 @@ module.exports = {
   },
   resolve: {
     // Tell webpack to look for required files in bower and node
-    modulesDirectories: ['bower_components', 'node_modules'],
+    modulesDirectories: ['lib', 'node_modules'],
   },
   module: {
     loaders: [
