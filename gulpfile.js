@@ -7,6 +7,7 @@ var minifyCSS = require('gulp-minify-css');
 var clean = require('gulp-clean');
 var watch = require('gulp-watch');
 var rev = require('gulp-rev');
+var rename = require('gulp-rename');
 var tiny_lr = require('tiny-lr');
 var webpack = require('webpack');
 
@@ -40,7 +41,7 @@ gulp.task('clean', function() {
 gulp.task('sass', function() {
   return gulp.src('src/styles/main.scss')
     .pipe(sass(sassConfig).on('error', gutil.log))
-    .pipe(gulp.env.production ? minifyCss() : gutil.noop())
+    .pipe(gulp.env.production ? minifyCSS() : gutil.noop())
     .pipe(gulp.env.production ? rev() : gutil.noop())
     .pipe(gulp.dest('dist/assets'));
 });
@@ -54,7 +55,12 @@ gulp.task('vendor', function() {
 
 // copy remaining assets to dist
 gulp.task('copy', function() {
-  return gulp.src(['src/**/*', '!src/scripts', '!src/scripts/**/*', '!src/styles', '!src/styles/**/*'])
+  var paths = ['src/**/*', '!src/scripts', '!src/scripts/**/*', '!src/styles', '!src/styles/**/*'];
+  if (!gulp.env.production) {
+    paths.push('!src/_package.json');
+  }
+  return gulp.src(paths)
+    .pipe(gulp.env.production ? rename(distPackage) : gutil.noop())
     .pipe(gulp.dest('dist'));
 });
 
@@ -125,3 +131,9 @@ var execWebpack = function(config) {
     gutil.log("[execWebpack]", stats.toString({colors: true}));
   });
 };
+
+var distPackage = function(file) {
+  if (file.basename.indexOf('_package') >= 0) {
+    file.basename = 'package';
+  }
+}
