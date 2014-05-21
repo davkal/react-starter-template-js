@@ -3,6 +3,7 @@
 // Bring in jQuery and React as a Bower component in the global namespace
 require("script!react/react-with-addons.js")
 require("script!jquery/jquery.js")
+require("script!bootstrap/dist/js/bootstrap.js");
 
 var App = require("./components/App")
 
