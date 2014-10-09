@@ -1,6 +1,7 @@
 # React JS Template App
 
-This is a plain js react starter template based on [@johnthethird's](https://github.com/johnthethird/react-starter-template) coffeescript tempalte.  I've updated the dependencies and made a few tweaks of my own.
+This is a plain js react starter template based on [@BigOnLogn](https://github.com/BigOnLogn/react-starter-template-js)
+
 
 This is a starter template for building your first [React](http://facebook.github.io/react/) application. Based on a [Gulp](http://gulpjs.com/) and [Webpack](http://webpack.github.io/) build system. If you look at the gulpfile, it implements some nifty features:
 

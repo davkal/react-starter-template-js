@@ -2,9 +2,10 @@ var path = require('path');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var express = require('express');
-var sass = require('gulp-sass');
+var less = require('gulp-less');
+var combine = require('stream-combiner');
 var minifyCSS = require('gulp-minify-css');
-var clean = require('gulp-clean');
+var del = require('del');
 var watch = require('gulp-watch');
 var rev = require('gulp-rev');
 var rename = require('gulp-rename');
@@ -23,24 +24,26 @@ if (gulp.env.production) {
 
 }
 
-var sassConfig = { includePaths: ['src/styles'] };
-httpPort = 3000;
+var safeLess = combine(less());
+safeLess.on('error', function(err) {
+    gutil.log(chalk.red(util.format('Plugin error: %s', err.message)));
+});
+var httpPort = 3000;
 // paths to files in lib that should be copied to dist/assets/vendr
-vendorPaths = ['es5-shim/es5-sham.js', 'es5-shim/es5-shim.js', 'bootstrap/dist/css/bootstrap.css'];
+var vendorPaths = ['es5-shim/es5-sham.js', 'es5-shim/es5-shim.js', 'bootstrap/dist/css/bootstrap.css'];
 
 /**
  * Tasks
  */
 
-gulp.task('clean', function() {
-  return gulp.src('dist', {read: false})
-    .pipe(clean());
+gulp.task('clean', function(cb) {
+  del(['dist'], cb);
 });
 
-// main.scss should @include any other css you want
-gulp.task('sass', function() {
-  return gulp.src('src/styles/main.scss')
-    .pipe(sass(sassConfig).on('error', gutil.log))
+// main.less should @include any other css you want
+gulp.task('less', function() {
+  return gulp.src('src/styles/main.less')
+    .pipe(safeLess)
     .pipe(gulp.env.production ? minifyCSS() : gutil.noop())
     .pipe(gulp.env.production ? rev() : gutil.noop())
     .pipe(gulp.dest('dist/assets'));
@@ -89,7 +92,7 @@ gulp.task('dev', ['build'], function() {
   });
 });
 
-gulp.task('build', ['webpack', 'sass', 'copy', 'vendor'], function() {});
+gulp.task('build', ['webpack', 'less', 'copy', 'vendor'], function() {});
 
 gulp.task('default', ['build'], function() {
   // give first-time users a little help

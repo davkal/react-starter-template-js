@@ -2,7 +2,7 @@
   "name": "react-starter-template",
   "version": "0.0.0",
   "authors": [
-    "Nick Moore"
+    "David Kaltschmidt"
   ],
   "license": "MIT",
   "private": true,
@@ -14,7 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "react": "~0.10.0",
+    "react": "~0.11.0",
     "es5-shim": "~2.3.0",
     "jquery": "~2.0.3",
     "bootstrap": "~3.1.1"

@@ -5,13 +5,8 @@ require("script!react/react-with-addons.js")
 require("script!jquery/jquery.js")
 require("script!bootstrap/dist/js/bootstrap.js");
 
-var App = require("./components/App")
-
-var Fluxxor = require('fluxxor');
-var stores = require('./stores');
-var actions = require('./actions');
-
-var flux = new Fluxxor.Flux(stores, actions);
-
-React.renderComponent(<App flux={flux} />, document.getElementById('app'))
+React.renderComponent(
+    <h1>Hello, world!</h1>,
+    document.body
+);
 
