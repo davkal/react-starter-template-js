@@ -119,7 +119,14 @@ var createServers = function(port, lrport) {
     gutil.log("LiveReload listening on", lrport);
   });
   var app = express();
+  var proxy = require('express-http-proxy');
+  var urlparse = require('url').parse;
   app.use(express.static(path.resolve("./dist")));
+  app.use('/api', proxy('localhost:4040', {
+      forwardPath: function(req, res) {
+          return '/api' + urlparse(req.url).path;
+      }
+  }));
   app.listen(port, function() {
     gutil.log("HTTP server listening on", port);
   });
