@@ -7,6 +7,6 @@ require("script!bootstrap/dist/js/bootstrap.js");
 
 React.renderComponent(
     <h1>Hello, world!</h1>,
-    document.body
+    document.getElementById('app')
 );
 
