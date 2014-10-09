@@ -31,7 +31,8 @@ safeLess.on('error', function(err) {
 });
 var httpPort = 3000;
 // paths to files in lib that should be copied to dist/assets/vendr
-var vendorPaths = ['es5-shim/es5-sham.js', 'es5-shim/es5-shim.js', 'bootstrap/dist/css/bootstrap.css'];
+var vendorPaths = ['es5-shim/es5-sham.js', 'es5-shim/es5-shim.js', 'bootstrap/dist/css/bootstrap.css',
+    'bootstrap/dist/css/bootstrap.css.map'];
 
 /**
  * Tasks
