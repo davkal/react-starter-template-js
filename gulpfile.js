@@ -6,6 +6,7 @@ var less = require('gulp-less');
 var combine = require('stream-combiner');
 var minifyCSS = require('gulp-minify-css');
 var del = require('del');
+var chalk = require('chalk');
 var watch = require('gulp-watch');
 var rev = require('gulp-rev');
 var rename = require('gulp-rename');
